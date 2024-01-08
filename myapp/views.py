@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from .models import Menu,Booking
 from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateAPIView ,DestroyAPIView 
-from rest_framework import generics
+from rest_framework import generics,viewsets
 from rest_framework.decorators import api_view
 
 from . import serializers
@@ -45,8 +45,11 @@ class SingleMenuItemView  (RetrieveUpdateAPIView,DestroyAPIView):
         item.delete()
         return Response({"status": "success", "message": "Item deleted."})
 
-class booking_view (APIView):
+class BookingViewSet (viewsets.ModelViewSet):
+  queryset =Booking.objects.all()
+  serializer_class=BookingSerializer  
   def get (self,request):
     items =Booking.objects.all()
     serializer = BookingSerializer(items, many = True)
     return Response(serializer.data)
+
