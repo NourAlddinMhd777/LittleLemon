@@ -30,17 +30,19 @@ class MenuItemView  (ListCreateAPIView):
 
 
 class SingleMenuItemView  (RetrieveUpdateAPIView,DestroyAPIView):
+  permission_classes = [IsAuthenticated]
   queryset =Menu.objects.all()
   serializer_class=MenuSerializer
   def get (self,request,id):
     items =Menu.objects.get(pk =id )
     serializer = MenuSerializer(items)
     return Response(serializer.data)
-  def post (self , request):
-    serializer = MenuSerializer(data=request.data)
+  def put(self, request,id):
+    items =Menu.objects.get(pk =id )
+    serializer = MenuSerializer(items,data=request.data)
     if serializer.is_valid():
-      serializer.save()
-      return Response({"status":"succsess","data":serializer.data})
+        serializer.save()
+        return Response({"status": "success", "data": serializer.data})
     return Response(serializer.errors, status=400)
   def delete(self , request,id):
         item = Menu.objects.get(pk=id)
