@@ -79,9 +79,8 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    
-
+# create DataBase
+DATABASES = {    
     'default': {  
         'ENGINE': 'django.db.backends.mysql',  
         'NAME': 'littlelemon',  
@@ -91,10 +90,9 @@ DATABASES = {
         'PORT': '3306',  
         'OPTIONS': {  
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
-        }  ,
+        }  , #OOOOOOOOOOOOOOO
         # 'CONN_MAX_AGE': 30,
         # 'ATOMIC_REQUESTS' : False
-
     }  
 
    
@@ -140,7 +138,7 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField' #OOOOOOOOOOOOOOO
 REST_FRAMEWORK = {
   "DEFAULT_RENDERER_CLASSES":[
       'rest_framework.renderers.JSONRenderer',
@@ -150,6 +148,6 @@ REST_FRAMEWORK = {
   "DEFAULT_AUTHENTICATION_CLASSES" : (
       'rest_framework.authentication.TokenAuthentication',
       'rest_framework.authentication.SessionAuthentication',
-  ),}
+  ),} #OOOOOOOOOOOOOOO
 
-DJOSER={"USER_ID_FIELD":"username",}
+DJOSER={"USER_ID_FIELD":"username",}   #OOOOOOOOOOOOOOO
