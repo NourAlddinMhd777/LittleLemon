@@ -8,5 +8,5 @@ urlpatterns = [
     path('myapp/', views.index, name='index'),
     path('items/', MenuItemView.as_view(), name='menu_items'),
     path('items/<int:id>', SingleMenuItemView.as_view(), name='single_menu_item'),
-        path('api-token-auth/', obtain_auth_token),
+    path('api-token-auth/', obtain_auth_token),
 ]
