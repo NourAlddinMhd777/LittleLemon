@@ -20,6 +20,33 @@ class MenuItemView  (ListCreateAPIView):
     serializer_class=MenuSerializer 
     def get (self,request):
       items =Menu.objects.all() 
+      #=======================search============================
+
+      search_ID = request.query_params.get("search_by_id")
+      if search_ID:
+            items= items.filter(id__icontains = search_ID)
+      search_Title = request.query_params.get("search_by_title")
+      if search_Title:
+            items= items.filter(title__icontains = search_Title)
+      #=========================================================
+
+      #======================order by===========================
+      # ordering by any thing :
+      ordering = request.query_params.get("ordering")
+      if ordering:
+        ordering_fields = ordering.split(",")
+
+        items= items.order_by(*ordering_fields)
+
+      # ordering by price :
+      ordering = request.query_params.get("ordering_by_price")
+      if ordering == 'True':
+
+        items= items.order_by("price")
+
+      #=============================================
+        
+
       serializer_items = serializers.MenuSerializer(items, many = True)
       return Response(serializer_items.data)
     def post (self ,request):
@@ -35,7 +62,10 @@ class SingleMenuItemView  (RetrieveUpdateAPIView,DestroyAPIView): #OOOOOOOOOOOOO
   serializer_class=MenuSerializer
   def get (self,request,id):
     items =Menu.objects.get(pk =id )
+
+
     serializer = MenuSerializer(items)
+    
     return Response(serializer.data)
   def put(self, request,id):
     items =Menu.objects.get(pk =id )
