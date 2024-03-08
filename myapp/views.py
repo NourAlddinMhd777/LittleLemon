@@ -8,6 +8,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.permissions import IsAuthenticated
 
+
 from . import serializers
 
 # Create your views here.
@@ -86,4 +87,3 @@ class BookingViewSet (viewsets.ModelViewSet): #OOOOOOOOOOOOOOO
     items =Booking.objects.all()
     serializer = BookingSerializer(items, many = True)
     return Response(serializer.data)
-

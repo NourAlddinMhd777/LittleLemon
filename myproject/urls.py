@@ -23,6 +23,7 @@ router = DefaultRouter()
 
 router .register(r'tables', views.BookingViewSet)
 
+from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
 
 
 urlpatterns = [
@@ -32,4 +33,7 @@ urlpatterns = [
     path('restaurant/Booking/', include(router.urls)),
     path('auth/',include('djoser.urls')),
     path('auth/',include('djoser.urls.authtoken')),
+    path('api/token/',TokenObtainPairView.as_view(),name = "token_obtain_pair"),
+    path('api/token/refresh',TokenRefreshView.as_view(),name = "token_refresh"),
+
 ]
